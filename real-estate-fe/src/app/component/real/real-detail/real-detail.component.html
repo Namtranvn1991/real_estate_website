@@ -1,0 +1,234 @@
+<main class="container-fluid mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+      <div class="row justify-content-center">
+        <section class="col-md-9">
+          <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="2000">
+                <img src="{{img}}"
+                     height="450px" class="d-block w-100" alt="...">
+              </div>
+
+              <div class="carousel-item" data-bs-interval="2000" *ngFor="let item of imgList let i = index">
+                <img src="{{item.url}}"
+                     height="450px" class="d-block w-100" alt="...">
+              </div>
+
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                      data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                      data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+            <div class="mt-3">
+              <!--                        Title field-->
+              <h5 class="fw-bolder text-danger">
+                {{realEstate.title | uppercase}}
+              </h5>
+
+              <!--                        Address field-->
+              <p class="me-2 ms-2">Địa chỉ: {{realEstate.address}}</p>
+
+            </div>
+            <div class="row ms-2">
+              <div class="col-md-6">
+                <table>
+                  <tr>
+                    <!--                        Price field-->
+                    <td class="text-center" style="width: 15rem">Mức Giá</td>
+                    <!--                        Area field-->
+                    <td class="text-center" style="width: 15rem">Diện tích</td>
+                    <!--                                    CHỉ hiển thị khi có Number of bedroom field-->
+                    <td class="text-center" style="width: 15rem">Hướng</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bolder text-center">
+                     <span *ngIf="realEstate.price/1000000000 >=1"
+                           class=" fs-5 text-danger">{{realEstate.price / 1000000000 | number: '1.0-0' }}
+                       tỷ
+                    </span>
+                      <span *ngIf="realEstate.price/1000000000 <1 && realEstate.price/1000000 >=1  "
+                            class="fs-5 text-danger">{{realEstate.price / 1000000| number: '1.0-0' }}
+                        triệu
+                    </span>
+                    </td>
+                    <td class="fw-bolder text-center">{{realEstate.area}} m²</td>
+                    <td class="fw-bolder text-center">{{realEstate.direction.name}}</td>
+                  </tr>
+                </table>
+              </div>
+              <div class=" col-md-3  mt-auto fs-6 float-end">
+                <a class=" btn btn-outline text-success" href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green"
+                       class="bi bi-share" viewBox="0 0 16 16">
+                    <path
+                      d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                  </svg>
+                  Chia sẻ
+                </a>
+              </div>
+              <div class=" col-md-3 mt-auto fs-6 float-end">
+                <a class="btn btn-outline text-success btn-hover mt-auto" href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green"
+                       class="bi bi-suit-heart" viewBox="0 0 16 16">
+                    <path
+                      d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
+                  </svg>
+                  Lưu tin
+                </a>
+              </div>
+            </div>
+            <div class="mt-3">
+              <h5 class="fw-bolder">Thông tin mô tả</h5>
+              <p class="mt-2 mb-2 me-2 ms-2" align="justify">
+                {{realEstate.description}}
+              </p>
+
+            </div>
+            <div>
+              <h5 class="fw-bolder">Đặc điểm bất động sản</h5>
+
+            </div>
+            <div class="mt-2">
+              <table class="table-light ms-2 me-2">
+                <tr>
+                  <td style="width: 15rem">Loại tin đăng</td>
+                  <td>{{realEstate.realEstateType.name}}</td>
+                </tr>
+                <tr>
+                  <td>Địa chỉ</td>
+                  <td>{{realEstate.address}}</td>
+                </tr>
+                <tr>
+                  <td>Giá tiền</td>
+                  <td>
+                  <span *ngIf="realEstate.price/1000000000 >=1"
+                        class="fs-6">{{realEstate.price / 1000000000 | number: '1.0-0' }} tỷ
+                    </span>
+                    <span *ngIf="realEstate.price/1000000000 <1 && realEstate.price/1000000 >=1  "
+                          class=" fs-6">{{realEstate.price / 1000000| number: '1.0-0' }} triệu
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Hướng</td>
+                  <td>{{realEstate.direction.name}}</td>
+                </tr>
+                <tr>
+                  <td>Diện tích</td>
+                  <td>{{realEstate.area}} m²</td>
+                </tr>
+                <tr>
+                  <td>Tình trạng</td>
+                  <td>
+                    <span *ngIf="realEstate.status == '1'"> Có sẳn</span>
+                    <span *ngIf="realEstate.status == '0'"> Không có sẳn</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </section>
+        <aside class="col-md-3">
+          <div class="card" style="width: 15rem;">
+            <div class="text-center mt-4">
+              <span *ngIf="realEstate.customer.gender == 1">
+                 <img class="rounded-circle" width="100" height="100"
+                      src="https://cdn.vectorstock.com/i/thumb-large/20/76/man-avatar-profile-vector-21372076.webp"
+                      data-holder-rendered="true">
+              </span>
+              <span *ngIf="realEstate.customer.gender == 0">
+                 <img class="rounded-circle" width="100" height="100"
+                      src="https://cdn.vectorstock.com/i/thumb-large/20/74/woman-avatar-profile-vector-21372074.webp"
+                      data-holder-rendered="true">
+              </span>
+            </div>
+
+            <div class="card-body text-center">
+              <h5 class="card-title">{{realEstate.customer.name}}</h5>
+            </div>
+            <button class="btn btn-success btn-lg ms-3 me-3 mb-4" (click)="showPhone()">
+              {{realEstate.customer.phoneNumber | slice:0:6}}*** Hiện số
+            </button>
+
+            <div class="text-center" *ngIf="msg =='showPhone'">
+              <button type="button" class="btn btn-light text-success  btn-lg ms-3 me-3 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="lightgreen"
+                     class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                        d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"></path>
+                </svg>
+                {{realEstate.customer.phoneNumber}}
+              </button>
+            </div>
+            <button class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4" (click)="openDialog()"> Email</button>
+            <button class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4"> Yêu cầu liên hệ lại</button>
+            <!--            Modal notice send mail successfully-->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Thông báo</h5>
+                  </div>
+                  <div class="modal-body">
+                    Bạn đã gửi mail thành công!
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--           End Modal notice send mail successfully-->
+          </div>
+          <div class="card mt-4 bg-light" style="width: 15rem;">
+            <p class="text-center fw-bolder mt-3">Bất động sản nổi bật</p>
+            <ul class="text-decoration-none list-unstyled ms-3">
+              <li><a class="text-decoration-none text-dark" href="#">Nam Hội An</a></li>
+              <li><a class="text-decoration-none text-dark">Nam Hòa Xuân</a></li>
+              <li><a class="text-decoration-none text-dark">Hòa Minh Liên Chiểu</a></li>
+              <li><a class="text-decoration-none text-dark">Coco bay land</a></li>
+              <li><a class="text-decoration-none text-dark">Nam Việt A</a></li>
+              <li><a class="text-decoration-none text-dark">Ngũ Hành Sơn </a></li>
+              <li><a class="text-decoration-none text-dark">Khu nghĩ dưỡng Mỹ Khê</a></li>
+              <li><a class="text-decoration-none text-dark">Khu đô thị Golden Land</a></li>
+              <li><a class="text-decoration-none text-dark">Khu đô thị Phước Lý</a></li>
+              <li><a class="text-decoration-none text-dark">Khu đô thị Phước Lý</a></li>
+              <li><a class="text-decoration-none text-dark">Khu nghĩ dưỡng Mỹ Khê</a></li>
+              <li><a class="text-decoration-none text-dark">Hòa Minh Liên Chiểu</a></li>
+            </ul>
+          </div>
+          <div class="card mt-4 bg-light" style="width: 15rem;">
+            <p class="text-center fw-bolder mt-3">Hõ trợ tiện ích</p>
+            <ul class="text-decoration-none list-unstyled ms-3">
+              <li><a class="text-decoration-none text-dark" href="#">Tư vấn phong thủy</a></li>
+              <li><a class="text-decoration-none text-dark" href="#">Dự tính chi phí làm nhà</a></li>
+              <li><a class="text-decoration-none text-dark" href="#">Tính lãi suất</a></li>
+              <li><a class="text-decoration-none text-dark" href="#">Xem tuổi làm nhà</a></li>
+              <li><a class="text-decoration-none text-dark" href="#">Quy trình xây nhà</a></li>
+            </ul>
+          </div>
+          <div class="card mt-4 mb-3 bg-light" style="width: 15rem;">
+            <p class="text-center fw-bolder mt-3">Nhà môi giới khu vực</p>
+            <div class="text-center m-auto">
+              <img class="rounded-circle" width="60" height="60"
+                   src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+                   data-holder-rendered="true">
+              <p>Bảo Ngọc - 0986868686</p>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+
+  </div>
+</main>
+

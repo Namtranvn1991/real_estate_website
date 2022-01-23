@@ -1,0 +1,79 @@
+<div class="container-fluid">
+  <div class="row g-1 pt-lg-5">
+    <div class="col-md-3" style="height: 100%">
+      <div class="profile-sidebar">
+        <!-- SIDEBAR USERPIC -->
+        <div class="profile-userpic" style="padding-left: 5px" *ngIf="customer.image ; else elseBlock">
+          <img src="{{customer.image.url}}"
+               class="img-responsive" alt="">
+        </div>
+        <!-- SIDEBAR USERPIC -->
+        <ng-template #elseBlock>
+          <div class="profile-userpic" style="padding-left: 5px"><img
+            src="https://cdn3.iconfinder.com/data/icons/avatars-flat/33/man_5-512.png"
+            class="img-responsive" alt=""></div>
+        </ng-template>
+        <div class="profile-usertitle">
+          <div class="profile-usertitle-name">
+            {{customer.name}}
+          </div>
+        </div>
+        <div class="profile-userbuttons">
+          <a type="button" class="btn btn-success btn-sm" [routerLink]="['/real-estate-new/post-history', this.id]">Xem lịch sử đăng bài</a>
+          <!--                    <button type="button" class="btn btn-danger btn-sm">Message</button>-->
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9 card">
+      <h5 class="text-h4 fs-6 card-header pb-0">Thông tin cá nhân</h5>
+      <div class="needs-validation">
+        <div class="row g-3 mx-2">
+          <div class="row">
+            <div class="col-2"><label style="padding-top: 10px">Họ và tên</label></div>
+            <div class="col-10"><span class="form-control">{{customer.name}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2"><label style="padding-top: 10px">Email</label></div>
+            <div class="col-10"><span class="form-control">{{customer.email}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              <label class="form-label" style="margin-top: 10px">Ngày sinh</label></div>
+            <div class="col-4">
+              <span class="form-control" style="width: 250px">{{customer.dateOfBirth}}</span>
+
+            </div>
+            <div class="col-2" style="padding-left: -10px">
+              <label class="form-label" style="margin-top: 10px">Số điện thoại</label>
+            </div>
+            <div class="col-4">
+              <span  class="form-control">{{customer.phoneNumber}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2"><label style="padding-top: 10px">Giới tính</label></div>
+            <div class="col-10" *ngIf="customer.gender==0">
+              <span  class="form-control">Nam</span>
+            </div>
+            <div class="col-10" *ngIf="customer.gender==1">
+              <span class="form-control">Nữ</span>
+            </div>
+            <div class="col-10">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2"><label style="padding-top: 0px">Địa chỉ</label></div>
+            <div class="col-10"><span style="" class="form-control">{{customer.address}}</span>
+            </div>
+          </div>
+        </div>
+        <hr  style="width: 97%;margin-top: 80px"> <div class="row">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

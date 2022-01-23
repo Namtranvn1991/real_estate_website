@@ -1,0 +1,13 @@
+
+<h2 class="modal-title fs-4 fw-bold">Xác nhận xóa khách hàng</h2>
+<hr>
+<p class="my-3">Bạn có chắc muốn xóa khách hàng <span class="text-danger fw-bold">{{customerName}}</span> ra khỏi danh sách không ?
+  <br>
+  <span>Lưu ý : thao tác này không thể hoàn tác !!!</span></p>
+
+<div class="d-flex flex-row-reverse">
+   <span>
+     <button  [mat-dialog-close] class="btn btn-secondary me-3">Thoát</button>
+      <button (click)="deleteCustomer()" class="btn btn-danger">Xóa</button>
+  </span>
+</div>

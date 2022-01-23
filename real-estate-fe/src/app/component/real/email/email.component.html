@@ -1,0 +1,47 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header bg-success text-light">
+      <h5 class="modal-title" id="exampleModalLabel">Nhập thông tin liên hệ của bạn </h5>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="formInfo" (ngSubmit)="onSubmit()">
+        <div class="row mb-3 justify-content-center">
+          <div class="col-md-11">
+            <input type="text" class="form-control" id="inputEmail3" name="name" formControlName="name"
+                   placeholder="Nhập tên:">
+            <span style="color: red"
+                  *ngIf="name.hasError('required') && (name.dirty ||name.touched)">
+              Tên không được để trống </span>
+            <span style="color: red"
+                  *ngIf="name.hasError('minlength')">
+             Tên phải lớn hơn 3 ký tự </span>
+          </div>
+        </div>
+        <div class="row mb-3 justify-content-center">
+          <div class="col-md-11">
+            <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại:"
+                   formControlName="phone">
+            <span style="color: red"
+                  *ngIf="phone.hasError('required') && (phone.dirty ||phone.touched)">
+              Số điện thoại không được để trống </span>
+            <span style="color: red"
+                  *ngIf="phone.hasError('pattern')">
+              Sai định dạng số điện thoại, vui lòng nhập lại: Vd: 0918824215 </span>
+          </div>
+          <input hidden type="text" class="form-control" name="customerMail" formControlName="customerMail"
+                 [ngModel]="customerMail">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)=" onNoClick()">
+            Đóng
+          </button>
+          <button type="submit" class="btn btn-success" [disabled]="formInfo.invalid "
+                  data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+          >Gửi
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

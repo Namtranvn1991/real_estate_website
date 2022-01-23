@@ -1,0 +1,153 @@
+<div class="container py-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-header pb-0">
+            <h6>Đăng tin bất động sản</h6>
+            <p class="text-success"></p>
+          </div>
+          <form class="form-group row g-3 needs-validation m-3" method="post" [formGroup]="form"
+                (ngSubmit)="onSubmit()">
+            <div class="col-md-12 position-relative">
+              <label for="title" class="form-label">Tiêu đề <span
+                style="color: red">(*)</span></label>
+              <input type="text" class="form-control" id="title" class="form-control" formControlName="title">
+              <small
+                *ngIf="form.controls.title.errors?.required && (form.controls.title.touched || form.controls.title.dirty) "
+                class="fst-italic" style="color: red">Tiêu đề không được để trống</small>
+              <small
+                *ngIf="form.controls.title.errors?.maxlength && (form.controls.title.touched || form.controls.title.dirty) "
+                class="fst-italic" style="color: red">Tối đa 256 kí tự</small>
+            </div>
+            <div class="col-md-6 position-relative">
+              <label for="1" class="form-label">Nhu cầu</label>
+              <div class="btn-group col-md-12 position-relative" id="1" role="group"
+                   aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="kindOfNews" id="btnRadio1"
+                       autocomplete="off" checked formControlName="kindOfNews" [value]="1">
+                <label class="btn btn-outline-success" for="btnRadio1">Bán</label>
+
+                <input type="radio" class="btn-check" name="kindOfNews" id="btnRadio2"
+                       autocomplete="off" formControlName="kindOfNews" [value]="2">
+                <label class="btn btn-outline-success" for="btnRadio2">Cho thuê</label>
+              </div>
+            </div>
+            <div class="col-md-6 position-relative">
+              <label for="2" class="form-label">Loại bất động sản</label>
+              <div class="btn-group col-md-12 position-relative" id="2" role="group"
+                   aria-label="Basic radio toggle button group">
+                <ng-container *ngFor="let item of realTypes">
+                  <input type="radio" class="btn-check" name="realEstateType" id="{{item.name}}"
+                         checked [value]="item.id" formControlName="realEstateType">
+                  <label class="btn btn-outline-success" for="{{item.name}}">{{item.name}}</label>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-md-12 position-relative">
+              <label for="address" class="form-label">Địa chỉ <span
+                style="color: red">(*)</span></label>
+              <input type="text" class="form-control" id="address" formControlName="address">
+              <small
+                *ngIf="form.controls.address.errors?.required && (form.controls.address.touched || form.controls.address.dirty) "
+                class="fst-italic" style="color: red">Địa chỉ không được để trống</small>
+              <small
+                *ngIf="form.controls.address.errors?.maxlength && (form.controls.address.touched || form.controls.address.dirty) "
+                class="fst-italic" style="color: red">Tối đa 256 kí tự</small>
+            </div>
+
+            <div class="col-md-6 position-relative">
+              <label for="position" class="form-label">Tình trạng <span style="color: red">(*)</span></label>
+              <select id="position" class="form-select" aria-label="Default select example" formControlName="status">
+                <option [ngValue]="null">Lựa chọn trạng thái</option>
+                <option value="1">Có sẵn</option>
+                <option value="2">Đang cho thuê</option>
+              </select>
+            </div>
+            <div class="col-md-6 position-relative">
+              <label for="direction" class="form-label">Hướng <span
+                style="color: red">(*)</span></label>
+              <select id="direction" class="form-select" aria-label="Default select example"
+                      formControlName="direction">
+                <option [ngValue]="null">Lựa chọn hướng.</option>
+                <ng-container *ngFor="let item of directions">
+                  <option [ngValue]="item">{{item.name}}</option>
+                </ng-container>
+              </select>
+            </div>
+            <div class="col-md-6 position-relative">
+              <label for="area" class="form-label">Diện tích (m2) <span style="color: red">(*)</span></label>
+              <input type="number" class="form-control" id="area" placeholder="100 m2" formControlName="area">
+              <small
+                *ngIf="form.controls.area.errors?.required && (form.controls.area.touched || form.controls.area.dirty) "
+                class="fst-italic" style="color: red">Diện tích không được để trống</small>
+              <small *ngIf="form.controls.area.errors?.min && (form.controls.area.touched || form.controls.area.dirty) "
+                     class="fst-italic" style="color: red">Nhập giá trị lớn hơn 0</small>
+            </div>
+            <div class="col-md-6 position-relative">
+              <label for="price" class="form-label">Giá (vnd) <span
+                style="color: red">(*)</span></label><span *ngIf="priceShow"> : {{priceShow|number}} vnd</span>
+              <input type="number" class="form-control" id="price" digits="35" decimals="3"
+                     placeholder="1.000.000.000 vnd" formControlName="price">
+
+              <small
+                *ngIf="form.controls.price.errors?.required && (form.controls.price.touched || form.controls.price.dirty) "
+                class="fst-italic" style="color: red">Giá không được để trống</small>
+              <small
+                *ngIf="form.controls.price.errors?.min && (form.controls.price.touched || form.controls.price.dirty) "
+                class="fst-italic" style="color: red">Nhập giá trị lớn hơn 0</small>
+            </div>
+            <div class="col-md-12 position-relative">
+              <label for="note" class="form-label">Ghi chú</label>
+              <textarea type="text" class="form-control" id="note" formControlName="description"></textarea>
+            </div>
+            <div class="col-md-12 position-relative field">
+              <label for="files" class="form-label">Thêm ảnh (tối thiểu 1 ảnh)</label>
+              <input type="file" multiple="multiple" class="form-control" id="files" required
+                     name="files[]" (change)="detectFiles($event)" accept="image/png, image/gif, image/jpeg">
+              <small *ngIf="imgMess"
+                     class="fst-italic" style="color: red">{{imgMess}}</small>
+              <div class="text-center row mt-4">
+                <ng-container *ngFor="let item of urls">
+                  <div class="col-md-2">
+                    <img [src]="item" width="200px" height="200px">
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
+                 aria-label="Toolbar with button groups">
+              <div class="btn-group me-2 float-right">
+                <button class="btn btn-success customBtn" type="submit" data-bs-toggle="modal" data-bs-target="#Modal" [disabled]="form.invalid||!imgdetect" >Đăng tin
+                </button>
+              </div>
+              <div class="btn-group me-2 float-right">
+                <button class="btn btn-secondary customBtn" type="submit" (click)="clearAll()">Hủy</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div></div>
+  </div>
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn đăng bài? (xác nhận sau khi ảnh được upload)
+        <div class="progress" *ngIf="uploadPercent | async as progress">
+          <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': progress + '%' }"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Đóng</button>
+        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="post()" [disabled]="!confirm">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+</div>
+

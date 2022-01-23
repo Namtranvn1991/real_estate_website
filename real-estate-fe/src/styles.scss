@@ -1,0 +1,68 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$srs-real-estate-primary: mat-palette($mat-indigo);
+$srs-real-estate-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$srs-real-estate-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$srs-real-estate-theme: mat-light-theme($srs-real-estate-primary, $srs-real-estate-accent, $srs-real-estate-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($srs-real-estate-theme);
+
+@import "~bootstrap/dist/css/bootstrap.css";
+
+//style này của Tài
+.custom-dialog-tai .mat-dialog-container {
+  position: relative;
+  padding: 0;
+  overflow: visible;
+  border-radius: 40px;
+  background: none;
+  box-shadow: none;
+}
+
+//style nay cua Hien
+.custom-dialog .mat-dialog-container {
+  position: relative;
+  padding: 0;
+  overflow: visible;
+  border-radius: 20px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.custom-dialog-tai .mat-dialog-container {
+  position: relative;
+  padding: 0;
+  overflow: visible;
+  border-radius: 40px;
+  background: none;
+  box-shadow: none;
+}
+
+.custom-dialog-create-customer .mat-dialog-container {
+  position: relative;
+  top: 20px;
+  padding: 0;
+  overflow: visible;
+  border-radius: 10px;
+
+}
+

@@ -1,0 +1,148 @@
+<div class="container-fluid mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h4 class="fw-bolder"> Lịch sử bài đăng của bạn </h4>
+      <div class="row mt-3 row justify-content-center">
+        <div class="col-md-12">
+          <div class="row ">
+            <form class="" class="container-fluid" #myNgForm="ngForm" (ngSubmit)="onSubmit()">
+              <div class="row ">
+                <div class="col-md-3">
+                  <select class="border-warning form-select" aria-label="Default select example" name="kindOfNew"
+                          [(ngModel)]="kindOfNew" [ngModelOptions]="{standalone: true}">
+                    <option value="" selected>Loại tin</option>
+                    <option value="1">Tin Bán</option>
+                    <option value="2">Tin cho thuê</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <select class="border-warning form-select" aria-label="Default select example" name="realNewType"
+                          [(ngModel)]="realNewType" [ngModelOptions]="{standalone: true}">
+                    <option selected value="">Loại BĐS</option>
+                    //////////////////////////
+                    <option value="1">Đất</option>
+                    <option value="2">Nhà ở</option>
+                  </select>
+                </div>
+                <!--                <div class="col-md-2">-->
+                <!--                  <select class="border-warning form-select" aria-label="Default select example" name="approval"-->
+                <!--                          [(ngModel)]="approval" [ngModelOptions]="{standalone: true}">-->
+                <!--                    <option selected value="">Duyêt</option>-->
+                <!--                    <option value="1">Chưa được duyệt</option>-->
+                <!--                    <option value="2">Đã được duyệt</option>-->
+                <!--                    <option value="3">Không được duyệt</option>-->
+                <!--                  </select>-->
+                <!--                </div>-->
+                <div class="col-md-5">
+                  <input class="border-warning form-control  me-2" type="search" name="title"
+                         [(ngModel)]="title" [ngModelOptions]="{standalone: true}" placeholder="Tìm theo tiêu đề">
+                </div>
+                <div class="col-md-1">
+                  <button class="btn btn-success text-light fs-6 float-end" type="submit"
+                  >Tìm
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex text-decoration-none mt-3">
+        <button class="btn btn-light me-3 text-decoration-none text-dark" (click)="showAll()">Tất cả bài đăng
+        </button>
+        <button class="btn btn-light me-3 text-decoration-none text-dark" (click)="sell()">Tin Bán
+        </button>
+        <button class="btn btn-light me-3 text-decoration-none text-dark" (click)="forRent()">Cho Thuê
+        </button>
+        <button class="btn btn-light me-3 text-decoration-none text-dark" (click)="accept()">Đã duyệt
+        </button>
+        <button class="btn btn-light me-3 text-decoration-none text-dark position-relative" (click)="waitAccept()">Chưa duyệt
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    {{numberwaiterAccept}}
+             </span>
+        </button>
+        <button class="btn btn-light me-3 text-decoration-none text-dark  position-relative" (click)="noAccept()">Khônngg duyệt
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    {{numberNoAccept}}
+             </span>
+        </button>
+      </div>
+      <div class="card-group mt-3">
+        <div class="row">
+          <div class="card mb-3" *ngFor="let item of realEstateNews let i = index">
+            <div class="row no-gutters">
+              <div class="col-md-3 m-auto">
+                <div *ngIf="item.imageList.length != 0">
+                  <img src="{{item.imageList[0].url}}"
+                       style="height: 90%" class="card-img" alt="...">
+                </div>
+                <div *ngIf="item.imageList.length ==0">
+                  <img src="https://staticfile.batdongsan.com.vn/images/avatar/no-image-default.png"
+                       style="height: 90%" class="card-img" alt="...">
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="card-body">
+                  <div class="">
+                    <h5 class="fw-bolder">{{item.title | uppercase}}</h5>
+                    <p class="">{{item.description}}</p>
+                    <span *ngIf="item.price/1000000000 >=1"
+                          class=" text-danger fw-bolder fs-4"> Giá: {{item.price / 1000000000 | number: '1.0-0' }} tỷ
+                    </span>
+                    <span *ngIf="item.price/1000000000 <1 && item.price/1000000 >=1  "
+                          class=" text-danger fw-bolder fs-4"> Giá: {{item.price / 1000000| number: '1.0-0' }} triệu
+                    </span>
+                    <span *ngIf="item.kindOfNews == 2">
+                    / tháng.
+                  </span>
+                    <span
+                      class="ms-2">Diện tích: {{item.area}}m²
+                    </span>
+                    <small
+                      class="ms-4">Ngày đăng: {{item.postDate | date: 'dd/MM/yyyy'}}
+                    </small>
+                    <div class="float-end">
+                      <a class="fs-6 btn btn-sm btn-warning text-white" href="real-estate-new/detail/{{item.id}}"
+                         style="background-color: #FE9900">
+                        Xem chi tiết
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class=" row float-end ">
+            <ul class="pagination pagination-sm  pagination-lg" style="margin:20px 0">
+              <div *ngIf="this.page >0 then previous"></div>
+              <ng-template #previous>
+                <li class="page-item">
+                  <button
+                    (click)="previousClick(1)" class="page-link" type="button">Trang trước
+                  </button>
+                </li>
+              </ng-template>
+              <li class="page-item">
+                <input class="page-link" type="number" value="1" min="1" [max]="totalPages"
+                       placeholder="{{totalPages}}" aria-label="Username" [value]="page + 1"
+                       aria-describedby="basic-addon1"
+                       (change)="findPaginnation($event.target.value)">
+              </li>
+              <li class="page-item ">
+                <span class="input-group-text page-link">{{page + 1}}/{{totalPages}}</span>
+              </li>
+              <div *ngIf="this.page  < this.totalPages-1 then nexts "></div>
+              <ng-template #nexts>
+                <li class="page-item">
+                  <button (click)="nextClick(1)" class="page-link" type="button">Trang sau</button>
+                </li>
+              </ng-template>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

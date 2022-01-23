@@ -1,0 +1,20 @@
+<div class="modal-content">
+  <div class="modal-header bg-success text-light">
+    <h5 class="modal-title" id="exampleModalLabel">Duyệt bài đăng thành công. </h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formInfo" (ngSubmit)="onSubmit()">
+      <div class="row mb-3 justify-content-center">
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <input hidden type="text" class="form-control" name="customerEmail" formControlName="customerEmail" [ngModel]="customerEmail">
+      </div>
+      <div class="modal-footer">
+<!--        <button type="submit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >OK</button>-->
+        <button class="btn btn-success me-3 text-center  justify-content-end"
+                                  (click)="acceptApproval(id)">Duyệt
+                          </button>
+      </div>
+    </form>
+  </div>
+</div>

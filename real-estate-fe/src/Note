@@ -1,0 +1,30 @@
+5ng g c
+ng g i model/name-model
+ng g m package/name-module --routing
+ng h s service/name-service
+1. Set bootstrap: npm i bootstrap
+@import bootstrap vào file style.css
+copy dán vào file angula.json
+"node_modules/jquery/dist/jquery.min.js",
+"node_modules/bootstrap/dist/js/bootstrap.min.js"
+2. Set phân trang: npm install ngx-pagination --save
+   Filter-search: npm i ng2-search-filter --save
+ inport vào AppModule: NgxPaginationModule,
+3. Set Material
+ng add @angular/material
+b1: Import MalDialogModule vào app module
+<<<<<<< HEAD
+
+
+
+thien them vao
+ngx-toastr
+npm install ngx-toastr --save
+npm install @angular/animations --save
+
+trong angular.json:
+ "node_modules/ngx-toastr/toastr.css"
+=======
+npm install --save @angular/material @angular/cdk
+npm install --save @angular/material @angular/cdk @angular/animations
+>>>>>>> 2dcfb21a045e891c69adbac6b388d46cfe1a2f69

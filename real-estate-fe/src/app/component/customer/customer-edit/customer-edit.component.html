@@ -1,0 +1,150 @@
+<main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-12 mt-5">
+
+<!--        <div class=" col-3">-->
+<!--          <button class="btn btn btn-secondary fw-bold ms-3 mt-3 mb-3 " [routerLink]="['/home']">Trở về</button>-->
+<!--        </div>-->
+        <div class="card mb-4">
+          <div class="card-header pb-0">
+            <h6>Chỉnh sửa thông tin</h6>
+            <p class="text-success"></p>
+          </div>
+          <form class="row g-3 needs-validation m-3" method="post" [formGroup]="customerForm"
+                (ngSubmit)="updateCustomer()">
+            <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                   placeholder="Nhập tên" hidden>
+            <div class="col-md-6 position-relative">
+              <label for="name" class="form-label">Họ và tên<span
+                style="color: red">(*)</span></label>
+              <input type="text" class="form-control" id="name" name="name" formControlName="name"
+                     placeholder="Nhập tên">
+              <small style="color: red"
+                     *ngIf="customerForm.controls.name.dirty &&customerForm.controls.name.hasError('required')">Tên
+                không được để
+                trống.</small>
+              <small style="color: red"
+                     *ngIf="customerForm.controls.name.dirty &&customerForm.controls.name.hasError('pattern')">Tên
+                không được có số và kí tự đặc biệt.</small>
+            </div>
+            <div class="col-md-6 position-relative">
+              <label for="date" class="form-label">Ngày sinh<span
+                style="color: red">(*)</span></label>
+              <input type="date" class="form-control" matInput id="date" name="date" formControlName="dateOfBirth">
+              <small style="color: red"
+                     *ngIf="customerForm.controls.dateOfBirth.dirty &&customerForm.controls.dateOfBirth.hasError('required')">Ngày
+                sinh
+                không được để
+                trống.</small>
+            </div>
+            <div class="col-md-6 col-sm-3 position-relative">
+              <label for="area" class="form-label">Email<span
+                style="color: red">(*)</span></label>
+              <input type="text" class="form-control" id="area" name="email" formControlName="email"
+                     placeholder="Nhập email" readonly>
+              <small style="color: red"
+                     *ngIf="!customerForm.controls.email?.valid && (customerForm.controls.email?.dirty)">Email không
+                được để
+                trống.</small><br>
+              <small style="color: red"
+                     *ngIf="!customerForm.controls.email?.valid && (customerForm.controls.email?.dirty)">Email không
+                đúng định
+                dạng.</small>
+            </div>
+            <div class="col-md-6 col-sm-3 position-relative">
+              <label for="price" class="form-label">Số điện thoại<span
+                style="color: red">(*)</span></label>
+              <input type="number" class="form-control" id="price" name="phoneNumber" formControlName="phoneNumber"
+                     placeholder="Nhập số điện thoại">
+              <span style="color: red"
+                    *ngIf="customerForm.controls.phoneNumber.dirty &&customerForm.controls.phoneNumber.hasError('required')">Số điện
+                thoại không được để trống.</span> <br>
+              <span style="color: red"
+                    *ngIf="customerForm.controls.phoneNumber.dirty &&customerForm.controls.phoneNumber.hasError('pattern')">Số điện thoại
+                phải có 10 số và bắt đầu từ 09xx.</span>
+            </div>
+
+            <div class="col-md-6 col-sm-3 position-relative">
+              <label for="price" class="form-label">Căn cước công dân<span
+                style="color: red">(*)</span></label>
+              <input type="number" class="form-control" id="IdCard" name="idCard" formControlName="idCard"
+                     placeholder="Nhập số Chứng minh">
+              <span style="color: red"
+                    *ngIf="customerForm.controls.idCard.dirty &&customerForm.controls.idCard.hasError('required')">Số chứng minh
+                không được để trống.</span> <br>
+              <span style="color: red"
+                    *ngIf="customerForm.controls.idCard.dirty &&customerForm.controls.idCard.hasError('pattern')">Số chứng minh
+                phải có 9 hoặc 12 số, không được có kí tự.</span>
+            </div>
+
+            <!--            <div class="col-md-3 col-sm-3 position-relative">-->
+            <!--              <p>bô lô ba la</p>-->
+            <!--            </div>-->
+            <div class="col-md-6 position-relative">
+              <label for="1" class="form-label">Giới tính<span
+                style="color: red">(*)</span></label>
+              <div class="btn-group col-md-12 position-relative" id="1" role="group"
+                   aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" id="gender"
+                       [value]="1" autocomplete="off" formControlName="gender" name="gender"
+                       checked>
+                <label class="btn btn-outline-success" for="gender">Nam</label>
+
+                <input type="radio" class="btn-check" name="gender" id="gender1"
+                       autocomplete="off" formControlName="gender" [value]="0">
+                <label class="btn btn-outline-success" for="gender1">Nữ</label>
+              </div>
+              <!--              <small style="color: red">Giới tính phải được chọn.</small>-->
+            </div>
+            <!--            <div class="col-md-6 position-relative">-->
+
+            <!--              </div>-->
+            <!--              <small style="color: red">Phân quyền phải được chọn.</small>-->
+            <div class="col-md-6 position-relative">
+              <label for="address" class="form-label">Địa chỉ<span
+                style="color: red">(*)</span></label>
+              <input type="text" class="form-control" id="address" formControlName="address" name="address"
+                     placeholder="Nhập địa chỉ">
+              <small style="color: red"
+                     *ngIf="customerForm.controls.address.dirty &&customerForm.controls.address.hasError('required')">
+                Địa chỉ không được để trống.</small>
+            </div>
+            <span [class.alert-danger]="message" (message)="message" [textContent]="message">{{'message'}}</span>
+
+            <div class=" btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
+                 aria-label="Toolbar with button groups">
+              <div class="btn-group me-2">
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal"
+                        [disabled]="customerForm.invalid">Lưu
+                </button>
+              </div>
+              <div class="btn-group me-2">
+                <a class="btn btn-secondary" (click)="onClick()">Xóa</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn cập nhập?
+      </div>
+      <div class="modal-footer">
+        <!--        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Đóng</button>-->
+        <button type="button" class="btn btn-primary" (click)="updateCustomer()" data-bs-dismiss="modal">Xác nhận
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

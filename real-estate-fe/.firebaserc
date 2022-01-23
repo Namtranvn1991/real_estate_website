@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "projectbds-c1826": {
+      "hosting": {
+        "srs-real-estate": [
+          "projectbds-c1826"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "projectbds-c1826"
+  }
+}

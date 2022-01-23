@@ -1,0 +1,8 @@
+<ng-container *ngIf="notifyShow">
+  <button type="button" class="btn btn-warning position-fixed top-50 end-0" mat-raised-button (click)="openBottomSheet()" >
+    Notifies <span class="badge bg-danger">{{notifyQuantity}}</span>
+  </button>
+</ng-container>
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

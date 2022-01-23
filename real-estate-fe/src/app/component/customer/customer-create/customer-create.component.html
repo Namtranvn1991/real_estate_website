@@ -1,0 +1,117 @@
+<div class="p-4 dialog-register">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <h4 style="padding-top: 0px">Đăng ký</h4>
+      </div>
+      <div class="col-6 text-end">
+        <button class="btn-close-c" (click)="closeDialog()">
+          <img class="close-img" src="https://salt.tikicdn.com/ts/upload/fe/20/d7/6d7764292a847adcffa7251141eb4730.png"
+               alt="icon">
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12" style="color: #ffaa30">Vui lòng nhập biểu mẫu bên dưới để đăng kí </div>
+      <hr>
+    </div>
+    <div class="row">
+      <form class="has-validation" novalidate [formGroup]="createCustomer" (ngSubmit)="submit()">
+        <p class="fs-5">Thông tin cá nhân</p>
+        <div class="input-form">
+              <span class="text-error"
+                    *ngIf="createCustomer.controls.name.touched && createCustomer.controls.name?.hasError('required')">Không được để trống.</span>
+          <span class="text-error"
+                *ngIf="createCustomer.controls.name.touched && createCustomer.controls.name?.hasError('pattern')">Tên không chứa số và từ 2 đến 100 kí tự.</span>
+          <input type="text" placeholder="Họ và tên" class="form-control" formControlName="name">
+          <span class="text-error"
+                *ngIf="createCustomer.controls.email.touched && createCustomer.controls.email?.hasError('required')">Không được để trống.</span>
+          <span class="text-error"
+                *ngIf="createCustomer.controls.email.touched && createCustomer.controls.email?.hasError('email')">Email chưa đúng format.</span>
+          <div *ngIf="validateErrorEmail" class="text-error">{{validateErrorEmail}}</div>
+          <input type="email" class="form-control fs-6" placeholder="Email"
+                 style="font-size: 15px;" formControlName="email">
+          <span class="text-error"
+                *ngIf="createCustomer.controls.address.touched && createCustomer.controls.address?.invalid">Không được để trống.</span>
+          <input type="text" class="form-control" placeholder="Địa chỉ" required formControlName="address">
+          <span class="text-error"
+                *ngIf="createCustomer.controls.idCard.touched && createCustomer.controls.idCard?.hasError('required')">Không được để trống.</span>
+          <span class="text-error"
+                *ngIf="createCustomer.controls.idCard.touched && createCustomer.controls.idCard?.hasError('pattern')">Căn cước công dân phải từ 9 đến 12 kí tự.</span>
+          <input type="text" class="form-control" placeholder="căn cước công dân" required formControlName="idCard">
+          <div class="row">
+            <div class="col-6">
+              <div class="text-error"
+                   *ngIf="createCustomer.controls.dateOfBirth.touched && createCustomer.controls.dateOfBirth?.invalid">
+                Không được để trống.
+              </div>
+            </div>
+            <div class="col-6">
+                  <span class="text-error"
+                        *ngIf="createCustomer.controls.phoneNumber.touched && createCustomer.controls.phoneNumber.hasError('required')">
+                    Không được để trống.
+                  </span>
+              <span class="text-error"
+                    *ngIf="createCustomer.controls.phoneNumber.touched && createCustomer.controls.phoneNumber.hasError('pattern')">
+                    Số điện thoại chưa đúng.
+                  </span>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="date" placeholder="Ngày sinh" class="form-control" required formControlName="dateOfBirth">
+            <input type="number" placeholder="Số điện thoại" class="form-control" style="margin-left: 10px" required
+                   formControlName="phoneNumber">
+          </div>
+          <div>
+            <br>
+            <input type="radio" value="1" name="gender" checked="checked" formControlName="gender" [value] = 1>
+            <label>Nam</label>
+            <input type="radio" value="2" name="gender" style="margin-left: 50px" formControlName="gender"
+                   [value]=2>
+            <label>Nữ</label>
+          </div>
+          <br>
+          <p class="fs-5">Thông tin tài khoản.</p>
+          <hr>
+          <div class="text-error"
+               *ngIf="createCustomer.controls.userName.touched  && createCustomer.controls.userName?.hasError('required')">
+            *Không được bỏ trống.
+          </div>
+          <div class="text-error" *ngIf="createCustomer.controls.userName.touched  && createCustomer.controls.userName?.hasError('minlength')">Tên đăng nhập từ 6 đến 100 kí tự.</div>
+          <div class="text-error" *ngIf="createCustomer.controls.userName.touched && createCustomer.controls.userName?.hasError('maxlength')">Tên đăng nhập từ 6 đến 100 kí tự.</div>
+          <div *ngIf="validateErrorUsername" class="text-error">{{validateErrorUsername}}</div>
+          <input type="text" placeholder="Tên đăng nhập" required class="form-control" formControlName="userName">
+          <div class="text-error"
+               *ngIf="createCustomer.controls.password.touched  && createCustomer.controls.password?.hasError('required')">
+            *Bạn chưa nhập mật khẩu.
+          </div>
+          <div class="text-error"
+               *ngIf="createCustomer.controls.password.touched  && createCustomer.controls.password?.hasError('minlength')">
+            *Mật khẩu từ 6 đến 200 kí tự.
+          </div>
+          <input type="password" placeholder="Mật Khẩu" class="form-control" formControlName="password">
+          <div class="text-error" *ngIf="createCustomer.controls.confirmPassword.touched && createCustomer.controls.confirmPassword?.hasError('checkPassword')">Mật khẩu xác thực chưa giống nhau.</div>
+          <span class="text-error"
+                *ngIf="createCustomer.controls.confirmPassword.touched && createCustomer.controls.confirmPassword?.hasError('required')">Bạn chưa nhập mật khẩu.</span>
+          <input type="password" placeholder="Nhập Lại Mật Khẩu" name="confirmPassword"
+                 class="form-control" formControlName="confirmPassword">
+        </div>
+        <div class="text-center">
+          <button type="submit" class="signupbtn" [disabled]="createCustomer.invalid">Đăng ký
+          </button>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-12 text-center" style="margin-bottom: 20px">
+          Bạn đã có tài khoản? <a (click)="login()">Đăng nhập tại đây </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

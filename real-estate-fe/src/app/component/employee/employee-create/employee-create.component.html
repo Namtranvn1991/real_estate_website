@@ -1,0 +1,200 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-12">
+        <div class=" col-3">
+          <button class="btn btn btn-secondary fw-bold ms-3 mt-3 mb-3 " routerLink="/employee/list">Trở về</button>
+        </div>
+        <div class="card mb-4">
+          <div class="card-header pb-0">
+            <h6>Thêm mới nhân viên</h6>
+            <p class="text-success"></p>
+          </div>
+          <form class="row g-3 needs-validation m-3" method="post" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+            <div class="col-md-6 col-sm-12 position-relative">
+              <label for="name" class="form-label">Họ và tên<span
+                style="color: red">(*)</span></label>
+              <input type="text" class="form-control" id="name" name="name" formControlName="name"
+                     placeholder="Nhập tên nhân viên">
+              <small style="color: red"
+                     *ngIf="name.hasError('required') && (name.dirty || name.touched)">Họ và tên không được để
+                trống.</small>
+              <small style="color: red"
+                     *ngIf="name.hasError('pattern')&& (name.dirty || name.touched)">Họ và tên không đúng định
+                dạng.</small>
+              <small style="color: red"
+                     *ngIf="name.hasError('minlength')&& (name.dirty || name.touched)">Họ và tên phải từ 6 đến 40 ký
+                tự.</small>
+              <small style="color: red"
+                     *ngIf="name.hasError('maxlength')&& (name.dirty || name.touched)">Họ và tên phải từ 6 đến 40 ký
+                tự.</small>
+            </div>
+            <div class="col-md-6 col-sm-12 position-relative">
+              <label for="date" class="form-label">Ngày sinh<span
+                style="color: red">(*)</span></label>
+              <input type="date" class="form-control" id="date" name="date" formControlName="dateOfBirth">
+              <small style="color: red"
+                     *ngIf="dateOfBirth.hasError('required') && (dateOfBirth.dirty || dateOfBirth.touched)">Ngày sinh
+                không được để
+                trống.</small>
+            </div>
+
+
+            <div class="col-md-4 col-sm-12 position-relative">
+              <label for="area" class="form-label">Email<span
+                style="color: red">(*)</span></label>
+              <input type="text" class="form-control" id="area" name="email" formControlName="email"
+                     placeholder="Nhập email">
+              <small style="color: red"
+                     *ngIf="email.hasError('required') && (email.dirty || email.touched)">Email không được để
+                trống.</small><br>
+              <small style="color: red"
+                     *ngIf="email.hasError('pattern') && (email.dirty || email.touched)">Email không đúng định
+                dạng.</small>
+
+            </div>
+
+            <div class="col-md-4 col-sm-12 position-relative">
+              <label for="status" class="form-label">Chức vụ<span
+                style="color: red">(*)</span></label>
+              <select id="status" class="form-select" aria-label="Default select example"
+                      formControlName="positionDTO" name="positionDTO">
+                <option [ngValue]="null">--Chọn--</option>
+                <option *ngFor="let item of positions"
+                        [ngValue]="item">{{item.name}}</option>
+              </select>
+              <small style="color: red"
+                     *ngIf="position_form.hasError('required') && (position_form.dirty || position_form.touched)">
+                Chức vụ phải được chọn.</small>
+            </div>
+            <div class="col-md-4 col-sm-12 position-relative">
+              <label for="status" class="form-label">Bằng cấp<span
+                style="color: red">(*)</span></label>
+              <select id="" class="form-select" aria-label="Default select example" formControlName="degreeDTO"
+                      name="degreeDTO">
+                <option [ngValue]="null">--Chọn--</option>
+                <option *ngFor="let item of degrees"
+                        [ngValue]="item">{{item.name}}</option>
+              </select>
+              <small style="color: red"
+                     *ngIf="degree_form.hasError('required') && (degree_form.dirty || degree_form.touched)">
+                Bằng cấp phải được chọn.</small>
+            </div>
+
+            <div class="col-md-3 col-sm-12 position-relative">
+              <label for="price" class="form-label">Số điện thoại<span
+                style="color: red">(*)</span></label>
+              <input type="text" class="form-control" id="price" name="phoneNumber" formControlName="phoneNumber"
+                     placeholder="Nhập số điện thoại">
+              <small style="color: red"
+                     *ngIf="phoneNumber.hasError('required') && (phoneNumber.dirty || phoneNumber.touched)">Số điện
+                thoại không được để trống.</small> <br>
+              <small style="color: red"
+                     *ngIf="phoneNumber.hasError('pattern') && (phoneNumber.dirty || phoneNumber.touched)">Số điện thoại
+                không đúng định
+                dạng.</small>
+            </div>
+
+            <div class="col-md-3 col-sm-12 position-relative">
+              <label for="price" class="form-label">CMND/CCCD<span
+                style="color: red">(*)</span></label>
+              <input type="text" class="form-control" id="idCard" name="idCard" formControlName="idCard"
+                     placeholder="Nhập số CMND/CCCD">
+              <small style="color: red"
+                     *ngIf="idCard.hasError('required') && (idCard.dirty || idCard.touched)">Số CMND/CCCD không được để
+                trống.</small> <br>
+              <small style="color: red"
+                     *ngIf="idCard.hasError('pattern') && (idCard.dirty || idCard.touched)">Số CMND phải có định dạng 9
+                số và CCCD phải có định dạng 12 số.</small>
+            </div>
+
+
+            <div class="col-md-3 col-sm-12 position-relative">
+              <label for="1" class="form-label">Giới tính<span
+                style="color: red">(*)</span></label>
+              <div class="btn-group col-md-12 col-sm-12 position-relative" id="1" role="group"
+                   aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" id="gender"
+                       [value]="1" autocomplete="off" formControlName="gender" name="gender"
+                       checked>
+                <label class="btn btn-outline-success" for="gender">Nam</label>
+
+                <input type="radio" class="btn-check" name="gender" id="gender1"
+                       autocomplete="off" formControlName="gender" [value]="0">
+                <label class="btn btn-outline-success" for="gender1">Nữ</label>
+              </div>
+              <!--              <small style="color: red">Giới tính phải được chọn.</small>-->
+            </div>
+            <div class="col-md-3 col-sm-12 position-relative">
+              <label for="2" class="form-label">Phân quyền<span
+                style="color: red">(*)</span></label>
+              <div class="btn-group col-md-12 col-sm-12 position-relative" id="2" role="group"
+                   aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" id="btnradio3"
+                       autocomplete="off"
+                       formControlName="roleDTO" name="roleDTO" [value]="1">
+                <label class="btn btn-outline-success" for="btnradio3">Admin</label>
+
+                <input type="radio" class="btn-check" name="btnradio2" id="btnradio4" checked
+                       autocomplete="off" [value]="2" formControlName="roleDTO" name="roleDTO">
+                <label class="btn btn-outline-success" for="btnradio4">Nhân viên</label>
+              </div>
+              <!--              <small style="color: red">Phân quyền phải được chọn.</small>-->
+            </div>
+            <div class="col-md-12 col-sm-12 position-relative">
+              <label for="address" class="form-label">Địa chỉ<span
+                style="color: red">(*)</span></label>
+              <input type="text" class="form-control" id="address" formControlName="address" name="address"
+                     placeholder="Nhập địa chỉ">
+              <small style="color: red"
+                     *ngIf="address.hasError('required') && (address.dirty || address.touched)">
+                Địa chỉ không được để trống.</small>
+            </div>
+
+            <div class=" btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
+                 aria-label="Toolbar with button groups">
+              <div class="btn-group me-2">
+                <button class="btn btn-success" data-backdrop="static" type="submit" data-bs-toggle="modal"
+                        data-bs-target="#Modal"
+                        [disabled]="employeeForm.invalid">Lưu
+                </button>
+              </div>
+              <div class="btn-group me-2">
+                <button class="btn btn-secondary" type="button" (click)="onClear()">Xóa</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div *ngIf="validateErrorEmail!==''" class="text-center row col-12 fs-5">
+  <h4 class="text-danger fst-italic ">{{validateErrorEmail}}</h4>
+
+<!--<small style="color: red"-->
+<!--       *ngIf="validateErrorEmail && (email.dirty || email.touched)">Email đã có người sử dụng</small>-->
+
+<!--<body>-->
+<!--&lt;!&ndash;Modal của thịnh&ndash;&gt;-->
+<!--<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>-->
+<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        Thêm mới nhân viên thành công-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        &lt;!&ndash;        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Đóng</button>&ndash;&gt;-->
+<!--        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitModal()">Xác nhận</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</body>-->
+
